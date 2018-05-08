@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="ISO-8859-1">
+<title>HelloWorld</title>
+</head>
+<style>
+
+
+input.ng-invalid {
+    background-color: lightred;
+}
+
+
+</style>
+<script src="../lib/angular.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script> -->
+<body>
+	<h1>Hello World from Guru</h1>
+
+	<!-- <div ng-app="myApp" ng-init="myCol='lightblue' w3-test-directive">
+
+		Column Color: <input type="text" ng-model="myCol"><br>
+
+		First Name: <input type="text" style="background-color: {{myCol"
+			ng-model="firstName"><br> Last Name: <input type="text"
+			style="background-color: {{myCol" ng-model="lastName"><br>
+		<br> Full Name: {{firstName + " " + lastName}}
+	</div> -->
+
+	<form ng-app="" name="myForm" ng-init="myText = 'post@myweb.com'">
+		Email: <input type="email" name="myAddress" ng-model="text" required>
+		<span ng-show="myForm.myAddress.$error.email">Not a valid
+			e-mail address</span>
+		<br/>
+		<b>Status</b><br/>
+		Valid ? {{myForm.myAddress.$valid}} <br/>
+		Dirty ? {{myForm.myAddress.$dirty}} <br/>
+		Touched ? {{myForm.myAddress.$touched}}
+	</form>
+
+	<!-- 
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope) {
+			$scope.firstName = "John";
+			$scope.lastName = "Doe";
+		});
+	</script> -->
+
+</body>
+</html>
+</body>
+</html>

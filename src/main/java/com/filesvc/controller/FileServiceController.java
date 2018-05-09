@@ -29,6 +29,7 @@ public class FileServiceController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping("/getDirStructure")
 	public HttpEntity<List<TreeItem>> getDirStructure(@RequestParam(value = "dir") String dir) throws Exception {
+		System.out.println("dir >> " + dir);
 		List<TreeItem> treeList = new ArrayList<TreeItem>();
 		File file = new File(dir);
 		if (file != null && file.exists()) {
@@ -43,6 +44,7 @@ public class FileServiceController {
 				addChildren(file, id, treeList);
 			}
 		}
+		System.out.println("treeList >>" + treeList);
 		return new ResponseEntity<List<TreeItem>>(treeList, HttpStatus.OK);
 	}
 

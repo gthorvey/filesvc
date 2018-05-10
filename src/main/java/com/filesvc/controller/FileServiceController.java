@@ -29,22 +29,21 @@ public class FileServiceController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping("/getDirStructure")
 	public HttpEntity<List<TreeItem>> getDirStructure(@RequestParam(value = "dir") String dir) throws Exception {
-		System.out.println("dir >> " + dir);
 		List<TreeItem> treeList = new ArrayList<TreeItem>();
 		File file = new File(dir);
 		if (file != null && file.exists()) {
+			String dirFullPath = StringUtils.replaceChars(file.getAbsolutePath(), '\\', '/');
 			TreeItem rootItem = new TreeItem();
-			rootItem.setName("root");
+			rootItem.setName(dirFullPath);
 			rootItem.setExpand(true);
 			String id = "1";
 			rootItem.setID(id);
-			rootItem.setFullPath(StringUtils.replaceChars(file.getAbsolutePath(), '\\', '/'));
+			rootItem.setFullPath(dirFullPath);
 			treeList.add(rootItem);
 			if (file.isDirectory()) {
 				addChildren(file, id, treeList);
 			}
 		}
-		System.out.println("treeList >>" + treeList);
 		return new ResponseEntity<List<TreeItem>>(treeList, HttpStatus.OK);
 	}
 

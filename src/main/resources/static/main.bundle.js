@@ -27,7 +27,7 @@ module.exports = "#header {\r\n  text-align: center;\r\n  font: normal 21px/1 Ar
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<hr/>\n<div id=\"header\">\n  Backoffice UI\n</div>\n<user-directory (itemDirSelected)='clickDirTree($event)'></user-directory>\n<div id=\"flex-container\">\n  <app-file-explorer [directorySelected]='chosenDirLoc' (itemSelected)='clickFileTree($event)' class='file-explorer'>Loading..</app-file-explorer>\n\n  <div class=\"main-content-container\">\n    <div class=\"sub-header\">\n      <app-sub-header [fileLoc2]='chosenFileLoc'>Loading..</app-sub-header>\n    </div>\n    <div class=\"main-content\">\n      <app-main-content [fileLoc]='chosenFileLoc'>Loading..</app-main-content>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<html>\r\n\r\n<head>\r\n  <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">\r\n  <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>\r\n  <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>\r\n</head>\r\n\r\n<body>\r\n  <div class=\"container-fluid\" style=\"background-color: white; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif\">\r\n\r\n    <div id=\"header\" class=\"jumbotron\">\r\n      Welcome to Backoffice UI\r\n    </div>\r\n    <div class=\"col-sm-4 col-sm-offset-4\" style=\"text-align: center\">\r\n      <user-directory (itemDirSelected)='clickDirTree($event)'></user-directory>\r\n    </div>\r\n    <div id=\"flex-container\">\r\n      <div class=\"col-sm-4\">\r\n        <app-file-explorer [directorySelected]='chosenDirLoc' (itemSelected)='clickFileTree($event)' class='file-explorer'>Loading..</app-file-explorer>\r\n      </div>\r\n      <div class=\"main-content-container\" class=\"col-sm-8\">\r\n        <div class=\"sub-header\">\r\n          <app-sub-header [fileLoc2]='chosenFileLoc'>Loading..</app-sub-header>\r\n        </div>\r\n        <div class=\"main-content\" class=\"col-sm-8\">\r\n          <app-main-content [fileLoc]='chosenFileLoc'>Loading..</app-main-content>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</body>\r\n\r\n</html>\r\n"
 
 /***/ }),
 
@@ -218,7 +218,7 @@ module.exports = " #simple-treeview, #product-details {\r\n    display: inline-b
 /***/ "./src/app/file-explorer/file-explorer.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<hr/>\n<div class=\"form\">\n    <dx-tree-view id=\"simple-treeview\" [items]=\"products\" dataStructure=\"plain\"\n    parentIdExpr=\"catagoryId\" keyExpr=\"id\" displayExpr=\"name\"\n        [width]=\"300\" (onItemClick)=\"selectItem($event)\"></dx-tree-view>\n</div>\n"
+module.exports = "<dx-tree-view id=\"simple-treeview\" [items]=\"products\" dataStructure=\"plain\" parentIdExpr=\"catagoryId\" keyExpr=\"id\" displayExpr=\"name\"\n    [width]=\"300\" (onItemClick)=\"selectItem($event)\">\n</dx-tree-view>\n"
 
 /***/ }),
 
@@ -379,7 +379,7 @@ module.exports = "table{\r\n\tmargin-top: 10px;\r\n\tmargin-left: 10px;\r\n}\r\n
 /***/ "./src/app/main-content/main-content.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<hr/>\n<div class=\"container\">\n  <div class=\"row\">\n    <form #backOfficeDataForm=\"ngForm\" (ngSubmit)=\"onFormSubmit(backOfficeDataForm.value)\">\n      <table class=\"table table-bordered \">\n        <tr>\n          <th class=\"col-md-3\">Parameter</th>\n          <th class=\"col-md-3\">Thumbnail</th>\n          <th class=\"col-md-3\">Default Value</th>\n          <th class=\"col-md-3\">Possible Values</th>\n        </tr>\n        <tr *ngFor=\"let dmaParameter of bmaParameters; let i=index;\">\n          <td name=\"parameter\" id=\"paramName_{{i}}\">{{dmaParameter.name}}\n            <input type=\"hidden\" name=\"dmaparameter_{{i}}\" id=\"dmaparameter_{{i}}\" [ngModel]=\"dmaParameter.name\">\n          </td>\n\n          <td></td>\n          <td>\n            <input type=\"text\" name=\"paramValue_{{i}}\" id=\"paramValue_{{i}}\" [ngModel]=\"dmaParameter.value\">\n            <input type=\"hidden\" name=\"defaultValue\" id=\"defaultValue\" value=\"{{dmaParameter.value}}\">\n\n          </td>\n          <td>\n            <select name=\"possibleValues\" id=\"possibleValues\" #selectedValue (change)=\"dmaParameter.value=selectedValue.value\">\n              <option selected disabled>values</option>\n              <option *ngFor=\"let possibleValue of possibleValues\" [value]=\"possibleValue.selectableValue\"> {{possibleValue.selectableValue}}</option>\n            </select>\n          </td>\n        </tr>\n\n      </table>\n      <br>\n\n      <div class=\"container\">\n        <div class=\"row\">\n          <button class=\"btn btn-primary\" type=\"submit\"> Export</button>\n        </div>\n\n      </div>\n    </form>\n\n  </div>\n</div>\n<br>\n<!-- <div>\n  {{backOfficeDataForm.value | json}}\n</div> -->\n"
+module.exports = "<div class=\"row\">\n  <form #backOfficeDataForm=\"ngForm\" (ngSubmit)=\"onFormSubmit(backOfficeDataForm.value)\">\n    <table class=\"table table-striped\">\n      <tr>\n        <th>Parameter</th>\n        <th>Thumbnail</th>\n        <th>Default Value</th>\n        <th>Possible Values</th>\n      </tr>\n      <tr *ngFor=\"let dmaParameter of bmaParameters; let i=index;\">\n        <td name=\"parameter\" id=\"paramName_{{i}}\">{{dmaParameter.name}}\n          <input type=\"hidden\" name=\"dmaparameter_{{i}}\" id=\"dmaparameter_{{i}}\" [ngModel]=\"dmaParameter.name\">\n        </td>\n\n        <td></td>\n        <td>\n          <input type=\"text\" name=\"paramValue_{{i}}\" id=\"paramValue_{{i}}\" [ngModel]=\"dmaParameter.value\" disabled>\n          <input type=\"hidden\" name=\"defaultValue\" id=\"defaultValue\" value=\"{{dmaParameter.value}}\">\n\n        </td>\n        <td>\n          <select name=\"possibleValues\" id=\"possibleValues\" #selectedValue (change)=\"dmaParameter.value=selectedValue.value\">\n            <option selected disabled>values</option>\n            <option *ngFor=\"let possibleValue of possibleValues\" [value]=\"possibleValue.selectableValue\"> {{possibleValue.selectableValue}}</option>\n          </select>\n        </td>\n      </tr>\n    </table>\n      <button class=\"btn btn-primary\" type=\"submit\"> Export</button>\n  </form>\n\n</div>\n\n<!-- <div>\n  {{backOfficeDataForm.value | json}}\n</div> -->\n"
 
 /***/ }),
 
@@ -479,7 +479,7 @@ module.exports = "\r\n"
 /***/ "./src/app/sub-header/sub-header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<hr/>\nBMA file chosen: {{fileLoc2}}\n\n\n\n"
+module.exports = "BMA file chosen<input type = \"text\" class=\"form-control\" value=\"{{fileLoc2}}\" disabled/>\n"
 
 /***/ }),
 
@@ -550,7 +550,7 @@ module.exports = ""
 /***/ "./src/app/user-directory/user-directory.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1>Input the Directory</h1>\n  <form  #directoryForm=\"ngForm\" (ngSubmit)=\"currentDirectory(directoryForm)\">\n    <div class=\"form-group  col-sm-4\">\n      <!-- <input type=\"file\" class=\"form-control\" id=\"directory\"\n      required [(ngModel)]=\"model.path\" name=\"path\" multiple directory webkitdirectory mozdirectory> -->\n      <input type=\"text\" class=\"form-control\" id=\"directory\"\n      required [(ngModel)]=\"model.path\" name=\"path\" value='C:/data/new'>\n      <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n    </div>\n  </form>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <form  #directoryForm=\"ngForm\" (ngSubmit)=\"currentDirectory(directoryForm)\">\n    <div class=\"form-group  col-sm-4\">\n        Enter a directory (e.g. C:/data/new)<br/>\n      <!-- <input type=\"file\" class=\"form-control\" id=\"directory\"\n      required [(ngModel)]=\"model.path\" name=\"path\" multiple directory webkitdirectory mozdirectory> -->\n      <input type=\"text\" class=\"form-control\" id=\"directory\"\n      required [(ngModel)]=\"model.path\" name=\"path\" value='C:/data/new'>\n      <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n    </div>\n  </form>\n</div>\n"
 
 /***/ }),
 
